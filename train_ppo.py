@@ -29,7 +29,17 @@ from torchrl.data.replay_buffers.samplers import SamplerWithoutReplacement
 from torchrl.data.replay_buffers.storages import LazyTensorStorage
 from torchrl.objectives import ClipPPOLoss
 from torchrl.objectives.value import GAE
-from torchrl.trainers import Trainer
+from torchrl.record.loggers.csv import CSVLogger
+from torchrl.record.loggers.tensorboard import TensorboardLogger
+from torchrl.record.loggers.wandb import WandbLogger
+from torchrl.record.loggers.mlflow import MLFlowLogger
+from torchrl.trainers import (
+    LogReward,
+    Recorder,
+    ReplayBufferTrainer,
+    Trainer,
+    UpdateWeights,
+)
 from torchrl.envs import ExplorationType
 from torchrl.data import MultiStep
 
@@ -205,6 +215,24 @@ def rl_incubator(config):
         lr=config["lr"]
     )
 
+
+    # -----------------------
+    # Build Logger
+    # -----------------------
+
+    # import wandb
+
+    # wandb_run = wandb.init(
+    #     entity="geoff",
+    #     project="TunedPPO",
+    #     name="TunedPPO_experiment_demo",
+    # )
+
+    # wandb_logger = WandbLogger(exp_name="tuned_PPO", project="TunedPPO_experiment_demo", offline=True, log_dir="./wnb_logs") #  save_dir="./wnb_artifacts",
+
+    tensorboard_logger = TensorboardLogger(exp_name="tuned_PPO", log_dir="./tb_logs")
+
+
     # -----------------------
     # Build Trainer
     # -----------------------
@@ -215,7 +243,26 @@ def rl_incubator(config):
         loss_module=loss_module,
         optimizer=optimizer,
         optim_steps_per_batch=config["n_optim"],
+        logger=tensorboard_logger #wandb_logger,
     )
+
+
+    # test_env = make_env(config["env_name"], parallel=False)
+
+
+    # recorder = Recorder(
+    # record_interval=100,  # log every 100 optimization steps
+    # record_frames=1000,  # maximum number of frames in the record
+    # frame_skip=1,
+    # policy_exploration=policy_module,
+    # environment=test_env,
+    # exploration_type=ExplorationType.DETERMINISTIC,
+    # log_keys=[("next", "reward")],
+    # out_keys={("next", "reward"): "rewards"},
+    # log_pbar=True,
+    # )
+    # recorder.register(trainer)
+
 
     trainer.train()
 

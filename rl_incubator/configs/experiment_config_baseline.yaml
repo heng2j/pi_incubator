@@ -1,0 +1,21 @@
+# configs/experiment_config.yaml
+device: "cpu"
+num_cells: 256
+frame_skip: 1
+lr: 0.0003
+frames_per_batch: 1000
+total_frames: 5000
+sub_batch_size: 64
+num_epochs: 10
+clip_epsilon: 0.2
+beta1: 0.9
+beta2: 0.999
+gamma: 0.99
+lmbda: 0.95
+entropy_eps: 0.0001 # 1e-4
+n_optim: 8
+log_interval: 500
+mp_context: "fork"
+env_name: "InvertedDoublePendulum-v4"
+num_workers: 1
+num_collectors: 1

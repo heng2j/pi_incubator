@@ -27,6 +27,8 @@ pip install metaflow
 pip install onnx-pytorch
 pip install onnxruntime
 
+pip install tensorboard
+pip install wandb
 
 
 # Fault tolerant (fixed sized number of workers, no elasticity, tolerates 3 failures)
