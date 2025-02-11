@@ -125,7 +125,7 @@ loss_module = ClipPPOLoss(
 )
 
 # 7. Define Optimizer
-optimizer = torch.optim.Adam(loss_module.parameters(), lr)
+optimizer = torch.optim.Adam(loss_module.parameters(), betas=(0.9, 0.999), lr=lr)
 
 # 8. Define Trainer
 trainer = Trainer(

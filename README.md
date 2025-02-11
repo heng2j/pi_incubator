@@ -27,4 +27,13 @@ pip install metaflow
 pip install onnx-pytorch
 pip install onnxruntime
 
+
+
+# Fault tolerant (fixed sized number of workers, no elasticity, tolerates 3 failures)
+torchrun --nnodes=1 --nproc-per-node=1 --max-restarts=3 --rdzv-id=1 --rdzv-backend=c10d --rdzv-endpoint=localhost:0 --nnodes=1 --nproc-per-node=1 train_ppo.py 
+
+
+torchrun --nnodes=1 --nproc-per-node=1 --max-restarts=3 --rdzv-id=1 --rdzv-backend=c10d --rdzv-endpoint=localhost:0 --nnodes=1 --nproc-per-node=1 train_ppo.py (--arg1 config.yaml)
+
+
 ```# rl_incubator
