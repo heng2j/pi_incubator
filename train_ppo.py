@@ -95,11 +95,14 @@ def make_env(env_name, parallel=False, num_workers=1):
 def make_actor_critic_modules(env):
     actor_net = nn.Sequential(
         nn.LazyLinear(config["num_cells"], device=device),
-        nn.Tanh(),
+        # nn.Tanh(),
+        nn.ReLU(),
         nn.LazyLinear(config["num_cells"], device=device),
-        nn.Tanh(),
+        # nn.Tanh(),
+        nn.ReLU(),
         nn.LazyLinear(config["num_cells"], device=device),
-        nn.Tanh(),
+        # nn.Tanh(),
+        nn.ReLU(),
         nn.LazyLinear(2 * env.action_spec.shape[-1], device=device),
         NormalParamExtractor(),
     )
@@ -120,11 +123,14 @@ def make_actor_critic_modules(env):
     
     value_net = nn.Sequential(
         nn.LazyLinear(config["num_cells"], device=device),
-        nn.Tanh(),
+        # nn.Tanh(),
+        nn.ReLU(),
         nn.LazyLinear(config["num_cells"], device=device),
-        nn.Tanh(),
+        # nn.Tanh(),
+        nn.ReLU(),
         nn.LazyLinear(config["num_cells"], device=device),
-        nn.Tanh(),
+        # nn.Tanh(),
+        nn.ReLU(),
         nn.LazyLinear(1, device=device),
     )
     value_module = ValueOperator(module=value_net, in_keys=["observation"])
