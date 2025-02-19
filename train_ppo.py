@@ -95,11 +95,14 @@ def make_env(env_name, parallel=False, num_workers=1):
 def make_actor_critic_modules(env):
     actor_net = nn.Sequential(
         nn.LazyLinear(config["num_cells"], device=device),
-        nn.Tanh(),
+        # nn.Tanh(),
+        nn.ReLU(),
         nn.LazyLinear(config["num_cells"], device=device),
-        nn.Tanh(),
+        # nn.Tanh(),
+        nn.ReLU(),
         nn.LazyLinear(config["num_cells"], device=device),
-        nn.Tanh(),
+        # nn.Tanh(),
+        nn.ReLU(),
         nn.LazyLinear(2 * env.action_spec.shape[-1], device=device),
         NormalParamExtractor(),
     )
@@ -112,19 +115,22 @@ def make_actor_critic_modules(env):
         in_keys=["loc", "scale"],
         distribution_class=TanhNormal,
         distribution_kwargs={
-            "min": env.action_spec.space.low,
-            "max": env.action_spec.space.high,
+            "low": env.action_spec.space.low,
+            "high": env.action_spec.space.high,
         },
         return_log_prob=True,
     )
     
     value_net = nn.Sequential(
         nn.LazyLinear(config["num_cells"], device=device),
-        nn.Tanh(),
+        # nn.Tanh(),
+        nn.ReLU(),
         nn.LazyLinear(config["num_cells"], device=device),
-        nn.Tanh(),
+        # nn.Tanh(),
+        nn.ReLU(),
         nn.LazyLinear(config["num_cells"], device=device),
-        nn.Tanh(),
+        # nn.Tanh(),
+        nn.ReLU(),
         nn.LazyLinear(1, device=device),
     )
     value_module = ValueOperator(module=value_net, in_keys=["observation"])
@@ -149,34 +155,35 @@ def rl_incubator(config):
     # Build Collector
     # -----------------------
     # Use a SyncDataCollector if multiprocessing fork is allowed; else use MultiaSyncDataCollector.
-    # if is_fork:
-    #     collector_cls = SyncDataCollector
-    #     env_arg = env
-    # else:
-    #     collector_cls = MultiaSyncDataCollector
-    #     env_arg = [env] * config["num_collectors"]
+    if is_fork:
+        collector_cls = SyncDataCollector
+        env_arg = env
+    else:
+        collector_cls = MultiaSyncDataCollector
+        env_arg = [env] * config["num_collectors"]
+        print("Using MultiaSyncDataCollector")
 
-    # collector = collector_cls(
-    #     env_arg,
-    #     policy_module,
-    #     frames_per_batch=config["frames_per_batch"],
-    #     total_frames=config["total_frames"],
-    #     split_trajs=False,
-    #     device=device,
-    #     storing_device=device,
-    #     exploration_type=ExplorationType.RANDOM,
-    #     postproc=MultiStep(gamma=config["gamma"], n_steps=5),
-    # )
-
-    # 4. Define Collector
-    collector = SyncDataCollector(
-        env,
+    collector = collector_cls(
+        env_arg,
         policy_module,
         frames_per_batch=config["frames_per_batch"],
         total_frames=config["total_frames"],
         split_trajs=False,
         device=device,
+        storing_device=device,
+        exploration_type=ExplorationType.RANDOM,
+        postproc=MultiStep(gamma=config["gamma"], n_steps=5),
     )
+
+    # 4. Define Collector
+    # collector = SyncDataCollector(
+    #     env,
+    #     policy_module,
+    #     frames_per_batch=config["frames_per_batch"],
+    #     total_frames=config["total_frames"],
+    #     split_trajs=False,
+    #     device=device,
+    # )
 
     # -----------------------
     # Build Replay Buffer
