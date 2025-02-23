@@ -8,6 +8,7 @@ optimizer, and trainer from configuration values.
 """
 
 import os
+import ray.tune
 import torch
 from torch import nn
 from tensordict.nn import TensorDictModule
@@ -317,4 +318,14 @@ if __name__ == "__main__":
 
 
     # Run training
-    rl_incubator(config)
+    # rl_incubator(config)
+
+
+    import ray
+    from ray import tune
+
+    ray.init()
+    analysis = tune.run(
+        rl_incubator,
+        config=config,
+    )
