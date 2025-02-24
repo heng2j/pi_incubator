@@ -11,6 +11,7 @@
 
 ## Table of Contents
 
+- [High-Level Architecture Diagram](#high-level-architecture-diagram)
 - [Installation](#installation)
   - [Conda Environment Setup](#conda-environment-setup)
   - [Pip Dependencies](#pip-dependencies)
@@ -21,7 +22,7 @@
   - [AWS & Kubernetes Configuration](#aws--kubernetes-configuration)
   - [Metaflow Runs](#metaflow-runs)
 - [Additional Information](#additional-information)
-- [TODO](#todo)
+- [TODOs](#todos)
 
 ---
 
