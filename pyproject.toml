@@ -1,0 +1,67 @@
+[project]
+name = "rl_incubator"
+version = "0.1.0"
+description = "Unified RL training framework with RLOps principles."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+authors = [
+  { name = "Heng Li"}
+]
+dependencies = [
+  "torch",
+  "tensordict",
+  "gymnasium==0.29.1",
+  "pygame",
+  "numpy==1.26.4",
+  "matplotlib",
+  "tqdm",
+  "torchrl",
+  "mujoco",
+  "imageio",
+  "metaflow",
+  "tensorboard",
+  "wandb",
+  "kubernetes==31.0.0"
+]
+
+[project.optional-dependencies]
+dev = ["mypy>=1.11.1", "ruff>=0.6.1"]
+
+[build-system]
+requires = ["setuptools>=73.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+
+[tool.setuptools]
+packages = ["pi_incubator"]
+
+[tool.setuptools.package-dir]
+"pi_incubator" = "pi_incubator"
+
+[tool.setuptools.package-data]
+"*" = ["py.typed"]
+
+[tool.ruff]
+lint.select = [
+    "E",    # pycodestyle
+    "F",    # pyflakes
+    "I",    # isort
+    "D",    # pydocstyle
+    "D401", # First line should be in imperative mood
+    "T201",
+    "UP",
+]
+lint.ignore = [
+    "UP006",
+    "UP007",
+    "UP035",
+    "D417",
+    "E501",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D", "UP"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"

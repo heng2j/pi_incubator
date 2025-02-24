@@ -46,6 +46,8 @@ from torchrl.data import MultiStep
 
 import multiprocessing
 import argparse
+import ray
+from ray import tune
 
 # -----------------------
 # Load configuration
@@ -287,7 +289,7 @@ def rl_incubator(config):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("-c", "--config", type=str, default="rl_incubator/configs/experiment_config_baseline.yaml")
+    parser.add_argument("-c", "--config", type=str, default="configs/experiment_config_baseline.yaml")
 
     args = parser.parse_args()
 
@@ -317,13 +319,7 @@ if __name__ == "__main__":
         os.environ["MUJOCO_GL"] = "glfw"
 
 
-    # Run training
-    # rl_incubator(config)
-
-
-    import ray
-    from ray import tune
-
+    # Run training with Ray Tune
     ray.init()
     analysis = tune.run(
         rl_incubator,
