@@ -149,7 +149,7 @@ pip install metaflow-ray
 
 
 
-## Usage
+## Current Experimental Usage
 
 ### Running Locally
 
@@ -158,6 +158,11 @@ To run a baseline training locally, use the following command:
 ```bash
 python train_ppo.py --config configs/experiment_config_baseline.yaml
 ```
+
+```bash
+python torchrl_ray_train.py --config configs/experiment_config_baseline.yaml
+```
+
 
 ### Running with `torchrun`
 
@@ -172,6 +177,8 @@ Or to run a tuned configuration:
 ```bash
 torchrun --nnodes=1 --nproc-per-node=1 --max-restarts=1 --rdzv-id=1 --rdzv-backend=c10d --rdzv-endpoint=localhost:0 train_ppo.py --config configs/experiment_config_tuned_PPO.yaml
 ```
+
+
 
 ### AWS & Kubernetes Configuration
 
@@ -230,24 +237,15 @@ kubectl port-forward -n argo service/argo-argo-workflows-server 2746:2746
 
 ---
 
-## Additional Information
 
-- **Docker:**  
-  Consider using a Dockerfile with a `requirements.txt` to containerize your environment. See the provided Dockerfile in the repository for reference.
-
-- **Model Export:**  
-  You can export trained Torch policies to ONNX for deployment on real-world systems.
-
-- **Experiment Tracking:**  
-  Integration with W&B and TensorBoard is supported for monitoring training progress.
 
 ---
 
-## TODO
-
+## TODOs
+- [x] Experiment with Ray Tune on the TorchRL Trainer.
 - [ ] Set up Training Dependencies with a Docker registry.
 - [ ] Use W&B logger for improved experiment tracking.
-- [ ] Experiment with Ray Tune on the TorchRL Trainer.
-- [ ] Run Metaflow training comparisons.
+- [ ] Run Metaflow training comparisons on TunedAdam.
+- [ ] Support local Kubernetes with [S3Mock](https://github.com/adobe/S3Mock)
 
 ---

@@ -11,21 +11,20 @@ RUN apt-get update && apt-get install -y \
 # Set the working directory in the container.
 WORKDIR /usr/src/app
 
-# # Copy the environment file (if you use it for local settings)
-# COPY .env .env
-
 # Set required environment variables for MuJoCo and PyOpenGL.
 ENV MUJOCO_GL=egl
 ENV PYOPENGL_PLATFORM=egl
 
-# Copy requirements.txt and install pip dependencies.
-COPY requirements.txt .
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
+# Install pip and setuptools
+RUN pip install --no-cache-dir --upgrade pip setuptools wheel
 
-# Copy the rest of your application code.
+# Copy the package files and install dependencies via pyproject.toml
+COPY pyproject.toml .
+COPY pi_incubator pi_incubator
+RUN pip install .[dev]  # Install package along with dev dependencies
+
+# Copy the rest of your application code (Metaflow, scripts, configs)
 COPY . .
 
-# # Set the default command.
-# # Adjust this entrypoint as needed for your use case.
+# # Default command (adjust as needed)
 # CMD ["python", "ppo_metaflow.py", "run", "--with", "kubernetes"]
