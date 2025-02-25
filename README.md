@@ -124,14 +124,6 @@ conda env config vars set MUJOCO_GL=egl PYOPENGL_PLATFORM=egl
 conda deactivate && conda activate rlops_env
 ```
 
-### Pip Dependencies
-
-Install the required Python packages using the provided `requirements.txt` file:
-
-```bash
-pip install -r requirements.txt
-```
-
 
 ### Optional Dependencies
 
@@ -143,6 +135,16 @@ pip install onnx-pytorch
 pip install onnxruntime
 pip install metaflow-ray
 ```
+
+
+### Install
+
+To install `pi_incubator`:
+
+```bash
+pip install -e .
+```
+
 
 ---
 
@@ -185,7 +187,7 @@ torchrun --nnodes=1 --nproc-per-node=1 --max-restarts=1 --rdzv-id=1 --rdzv-backe
 
 - **Deploying to AWS with Kubernetes:**
 
-As of now, please go `terraform-aws-metaflow` then follow the official [Outerbounds instruction](https://docs.outerbounds.com/engineering/deployment/aws-k8s/deployment/#apply-terraform-template-to-provision-aws-infrastructure) to deploy these services in your AWS account:AWS EKS cluster, Amazon S3, AWS Fargate and Relational Database Service (RDS). 
+As of now, please go to `terraform-aws-metaflow` dir then follow the official [Outerbounds instruction](https://docs.outerbounds.com/engineering/deployment/aws-k8s/deployment/#apply-terraform-template-to-provision-aws-infrastructure) to deploy these services in your AWS account:AWS EKS cluster, Amazon S3, AWS Fargate and Relational Database Service (RDS). 
 
 
 - **AWS EKS:**
@@ -244,6 +246,8 @@ kubectl port-forward -n argo service/argo-argo-workflows-server 2746:2746
 
 ## TODOs
 - [x] Experiment with Ray Tune on the TorchRL Trainer.
+- [x] Experiment with Ray Collector with TorchRL Trainer.
+- [ ] Experiment with Ray Collector with Ray Tune + TorchRL Trainer.
 - [ ] Set up Training Dependencies with a Docker registry.
 - [ ] Use W&B logger for improved experiment tracking.
 - [ ] Run Metaflow training comparisons on TunedAdam.

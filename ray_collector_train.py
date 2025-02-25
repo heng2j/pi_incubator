@@ -40,8 +40,19 @@ from torchrl.record.loggers.tensorboard import TensorboardLogger
 from torchrl.objectives.value import GAE
 from tqdm import tqdm
 import ray
+import os
+import multiprocessing
 
 if __name__ == "__main__":
+
+
+    # Determine device (this example forces CPU if no CUDA or if using fork mode on Mac)
+    is_fork = multiprocessing.get_start_method() == "fork"
+    device = torch.device(0) if torch.cuda.is_available() and not is_fork else torch.device("cpu")
+
+    # Set MuJoCo rendering backend if on CPU (macOS)
+    if device.type == "cpu":
+        os.environ["MUJOCO_GL"] = "glfw"
 
     # ray.shutdown()
     # ray.init(local_mode=True)
@@ -158,11 +169,23 @@ if __name__ == "__main__":
         create_env_fn=[env] * num_collectors,
         policy=policy_module,
         collector_class=SyncDataCollector,
+        
+
+        # TODO: Report to TorchRL to notify them that the following collector kwargs are not being passed to the collector
+        # Currently we need to added them to the collector class in the TorchRL library
+        # TODO: Investigate if the following are passing into SyncDataCollector
         collector_kwargs={
             "max_frames_per_traj": 50,
             "device": device,
             "init_random_frames": -1
         },
+
+        # total_frames=5000,
+        # max_frames_per_traj = 50,
+        init_random_frames = -1,
+        reset_at_each_iter=-False,
+        device=device,
+
         remote_configs=remote_config,
         num_collectors=num_collectors,
         total_frames=total_frames,

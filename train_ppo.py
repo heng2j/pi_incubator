@@ -253,7 +253,7 @@ def rl_incubator(config):
         logger=tensorboard_logger #wandb_logger,
     )
 
-    
+
 
 
     # test_env = make_env(config["env_name"], parallel=False)
@@ -286,7 +286,7 @@ def rl_incubator(config):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("-c", "--config", type=str, default="rl_incubator/configs/experiment_config_baseline.yaml")
+    parser.add_argument("-c", "--config", type=str, default="configs/experiment_config_baseline.yaml")
 
     args = parser.parse_args()
 
