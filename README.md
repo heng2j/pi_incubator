@@ -241,12 +241,20 @@ kubectl port-forward -n argo service/argo-argo-workflows-server 2746:2746
 ---
 
 
+### Experimental Runs
+
+Investigating why collector kwargs are not being passed to desinated collector from RayCollector. Need to understand how the argument are being pass. Will reachout to TorchRL team
+```bash
+python ray_collector_train.py
+```
+
 
 ---
 
 ## TODOs
 - [x] Experiment with Ray Tune on the TorchRL Trainer.
 - [x] Experiment with Ray Collector with TorchRL Trainer.
+- [ ] Investigate how collector kwargs from Ray Collector are passing into SyncDataCollector
 - [ ] Experiment with Ray Collector with Ray Tune + TorchRL Trainer.
 - [ ] Set up Training Dependencies with a Docker registry.
 - [ ] Use W&B logger for improved experiment tracking.
