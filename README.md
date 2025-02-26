@@ -243,10 +243,12 @@ kubectl port-forward -n argo service/argo-argo-workflows-server 2746:2746
 
 ### Experimental Runs
 
-Investigating why collector kwargs are not being passed to desinated collector from RayCollector. Need to understand how the argument are being pass. Will reachout to TorchRL team
+Investigating why collector kwargs are not being passed to desinated collector from RayCollector. Need to understand how the argument are being pass. Will reachout to TorchRL team.
 ```bash
 python ray_collector_train.py
 ```
+
+Currently 
 
 
 ---
