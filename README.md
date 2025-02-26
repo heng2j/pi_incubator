@@ -248,7 +248,17 @@ Investigating why collector kwargs are not being passed to desinated collector f
 python ray_collector_train.py
 ```
 
-Currently 
+Currently not able to train with RayCollector and TorchRL trainer together. However, by fixing the the following on the official [ray_train.py](https://github.com/pytorch/rl/blob/main/examples/distributed/collectors/multi_nodes/ray_train.py) example. It is working without TorchRL trainer.
+
+
+`RuntimeError: Setting 'advantage' via the constructor is deprecated, use .set_keys(<key>='some_key') instead.`
+
+Uppon fixed the outdated ClipPPOLoss 
+
+`RuntimeError: The distribution TanhNormal has not analytical mode. Use ExplorationMode.DETERMINISTIC to get a deterministic sample from it.`
+
+Need to set_exploration_type from ExplorationType.MODE to ExplorationType.DETERMINISTIC
+
 
 
 ---
