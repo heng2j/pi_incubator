@@ -266,11 +266,14 @@ Need to set_exploration_type from ExplorationType.MODE to ExplorationType.DETERM
 ## TODOs
 - [x] Experiment with Ray Tune on the TorchRL Trainer.
 - [x] Experiment with Ray Collector with TorchRL Trainer.
-- [ ] Investigate how collector kwargs from Ray Collector are passing into SyncDataCollector
-- [ ] Experiment with Ray Collector with Ray Tune + TorchRL Trainer.
+- [x] Investigate how collector kwargs from Ray Collector are passing into SyncDataCollector
+- [ ] Investigating [Isaac Gym Wrapper](https://pytorch.org/rl/0.6/_modules/torchrl/envs/libs/isaacgym.html#IsaacGymWrapper)
+- [ ] Investigating on Self-play env set up
+- [ ] Support local Kubernetes with [S3Mock](https://github.com/adobe/S3Mock)
 - [ ] Set up Training Dependencies with a Docker registry.
+- [ ] Experiment with Ray Collector with Ray Tune + TorchRL Trainer.
 - [ ] Use W&B logger for improved experiment tracking.
 - [ ] Run Metaflow training comparisons on TunedAdam.
-- [ ] Support local Kubernetes with [S3Mock](https://github.com/adobe/S3Mock)
+
 
 ---
