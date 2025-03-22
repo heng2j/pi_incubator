@@ -1,19 +1,19 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling>=1.18.0"]
 build-backend = "hatchling.build"
 
 [project]
-name = "rl_incubator"
+name = "pi_incubator"
 version = "0.1.0"
 description = "A reinforcement learning incubator project with Ray and TorchRL"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.11"
 license = "MIT"
 authors = [
-    { name = "Your Name", email = "your.email@example.com" }
+    {name = "Heng Li", email = "heng2j@gmail.com"}
 ]
 dependencies = [
-    "torch>=2.0.0",
+    "torch>=2.2.0",
     "torchrl>=0.2.0",
     "ray>=2.0.0",
     "gymnasium>=0.29.0",
@@ -35,17 +35,19 @@ dev = [
     "mypy>=1.0.0",
 ]
 
+[tool.hatch.build.targets.wheel]
+packages = ["src/pi_incubator"]
+
 [tool.black]
 line-length = 88
-target-version = ["py38"]
-include = '\.pyi?$'
+target-version = ["py311"]
 
 [tool.isort]
 profile = "black"
 multi_line_output = 3
 
 [tool.mypy]
-python_version = "3.8"
+python_version = "3.11"
 warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = true
@@ -54,4 +56,4 @@ check_untyped_defs = true
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
-addopts = "-v --cov=rl_incubator --cov-report=term-missing"
+addopts = "-v --cov=pi_incubator --cov-report=term-missing"

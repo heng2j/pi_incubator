@@ -47,10 +47,8 @@ import multiprocessing
 import argparse
 
 # -----------------------
-# Load configuration
+# Local Imports
 # -----------------------
-# from utils.config_parser import load_config
-import yaml
 
 
 
@@ -139,7 +137,7 @@ def make_actor_critic_modules(env):
 
 
 
-def rl_incubator(config):
+def pi_incubator(config):
 
     # Create environment and initialize observation normalization stats
     env = make_env(config["env_name"], parallel=False)
@@ -292,14 +290,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
 
-
-    def load_config(config_path: str):
-        if not os.path.exists(config_path):
-            raise FileNotFoundError(f"Configuration file {config_path} not found.")
-        with open(config_path, "r") as f:
-            config = yaml.safe_load(f)
-        return config
-
     # config = load_config("rl_incubator/configs/experiment_config.yaml")
 
     # Determine device (this example forces CPU if no CUDA or if using fork mode on Mac)
@@ -318,4 +308,4 @@ if __name__ == "__main__":
 
 
     # Run training
-    rl_incubator(config)
+    pi_incubator(config)
