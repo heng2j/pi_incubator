@@ -230,7 +230,7 @@ def rl_incubator(config):
     # import wandb
 
     # wandb_run = wandb.init(
-    #     entity="geoff",
+    #     entity="pi_incubator",
     #     project="TunedPPO",
     #     name="TunedPPO_experiment_demo",
     # )
@@ -250,7 +250,8 @@ def rl_incubator(config):
         loss_module=loss_module,
         optimizer=optimizer,
         optim_steps_per_batch=config["n_optim"],
-        logger=tensorboard_logger #wandb_logger,
+        logger=tensorboard_logger, #tensorboard_logger, #wandb_logger,
+
     )
 
 

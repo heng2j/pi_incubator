@@ -1,3 +1,108 @@
+# RL Incubator
+
+A modern reinforcement learning framework built with Ray and TorchRL, following best practices and modern Python project structure.
+
+## Features
+
+- Distributed training with Ray
+- PPO implementation with TorchRL
+- Modern project structure following Python best practices
+- Comprehensive testing and development tools
+- Configurable training pipelines
+
+## Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/rl_incubator.git
+cd rl_incubator
+
+# Create a virtual environment (recommended)
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install the package in development mode
+pip install -e ".[dev]"
+```
+
+## Project Structure
+
+```
+rl_incubator/
+├── src/
+│   └── rl_incubator/
+│       ├── models/         # Neural network models
+│       ├── environments/   # RL environments
+│       ├── training/       # Training scripts and utilities
+│       ├── utils/         # Utility functions
+│       └── configs/       # Configuration files
+├── tests/                 # Test files
+├── notebooks/            # Jupyter notebooks
+├── scripts/             # Utility scripts
+├── configs/             # Configuration files
+├── docs/               # Documentation
+└── pyproject.toml      # Project metadata and dependencies
+```
+
+## Usage
+
+```python
+from rl_incubator.training import PPOTrainer
+from rl_incubator.environments import GymEnv
+from rl_incubator.models import PPOActorCritic
+
+# Create environment
+env = GymEnv("Ant-v4")
+
+# Create model
+model = PPOActorCritic(env.observation_space, env.action_space)
+
+# Create trainer
+trainer = PPOTrainer(env, model)
+
+# Train the model
+trainer.train()
+```
+
+## Development
+
+### Running Tests
+
+```bash
+pytest
+```
+
+### Code Style
+
+This project uses:
+- Black for code formatting
+- isort for import sorting
+- flake8 for linting
+- mypy for type checking
+
+To format code:
+```bash
+black .
+isort .
+```
+
+To run type checking:
+```bash
+mypy .
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
 # RLOps Policies Incubator
 
 
@@ -92,7 +197,7 @@
 By leveraging TorchRL, Ray, and Metaflow, they jointly provide an end-to-end RLOps solution—from flexible algorithm design to scalable, reproducible production experiments.**
 
 **[TorchRL](https://github.com/pytorch/rl)**  
-- **PyTorch-first:** Leverages PyTorch’s flexibility for custom RL algorithms.  
+- **PyTorch-first:** Leverages PyTorch's flexibility for custom RL algorithms.  
 - **Modularity:** Allows rapid prototyping with composable network components.
 
 **[Ray & Ray Tune](https://github.com/ray-project/ray)**  
