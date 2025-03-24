@@ -1,5 +1,5 @@
 
-# RLOps Policies (π) Incubator
+# RLOps Policies Pi(π) Incubator
 
 
 **Pi(π) Incubator** is an unified RL training framework designed with RLOps in mind to empower researchers with a modular, scalable framework for training reinforcement learning (RL) policies. It integrates various tools such as TorchRL, Metaflow, and Ray to support both local development and cloud-based experiments (e.g., AWS EKS). This repository includes training scripts, configuration files, and utilities for orchestrating distributed RL experiments at scale, providing frictionless, scalable, and user-friendly infrastructure that accelerates research development cycles
