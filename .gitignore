@@ -1,0 +1,56 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.env/
+.venv/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment variables
+.env
+.env.*
+
+# Log files
+*.log
+logs/
+tb_logs/
+wandb/
+
+# Model files
+models/
+*.pth
+*.onnx
+*.pt
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Project specific
+*.pkl
+outputs/ 

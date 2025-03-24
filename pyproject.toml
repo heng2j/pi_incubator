@@ -37,6 +37,22 @@ dev = [
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/pi_incubator"]
+exclude = [
+    "**/__pycache__",
+    "**/.*",
+    "**/*.pyc",
+    "**/*.pyo",
+    "**/*.pyd",
+]
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+    "**/__pycache__",
+    "**/.*",
+    "dist",
+    "build",
+    "*.egg-info",
+]
 
 [tool.black]
 line-length = 88
