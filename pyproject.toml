@@ -1,67 +1,75 @@
+[build-system]
+requires = ["hatchling>=1.18.0"]
+build-backend = "hatchling.build"
+
 [project]
-name = "rl_incubator"
+name = "pi_incubator"
 version = "0.1.0"
-description = "Unified RL training framework with RLOps principles."
+description = "A reinforcement learning incubator project with Ray and TorchRL"
 readme = "README.md"
-license = { text = "MIT" }
 requires-python = ">=3.11"
+license = "MIT"
 authors = [
-  { name = "Heng Li"}
+    {name = "Heng Li", email = "heng2j@gmail.com"}
 ]
 dependencies = [
-  "torch",
-  "tensordict",
-  "gymnasium==0.29.1",
-  "pygame",
-  "numpy==1.26.4",
-  "matplotlib",
-  "tqdm",
-  "torchrl",
-  "mujoco",
-  "imageio",
-  "metaflow",
-  "tensorboard",
-  "wandb",
-  "kubernetes==31.0.0",
+    "torch>=2.2.0",
+    "torchrl>=0.2.0",
+    "ray>=2.0.0",
+    "gymnasium==0.29.1",
+    "matplotlib>=3.7.0",
+    "tensorboard>=2.13.0",
+    "wandb>=0.15.0",
+    "tqdm>=4.65.0",
+    "numpy>=1.24.0",
+    "pandas>=2.0.0",
 ]
 
 [project.optional-dependencies]
-dev = ["mypy>=1.11.1", "ruff>=0.6.1"]
-
-[build-system]
-requires = ["setuptools>=73.0.0", "wheel"]
-build-backend = "setuptools.build_meta"
-
-
-[tool.setuptools]
-packages = ["pi_incubator"]
-
-[tool.setuptools.package-dir]
-"pi_incubator" = "pi_incubator"
-
-[tool.setuptools.package-data]
-"*" = ["py.typed"]
-
-[tool.ruff]
-lint.select = [
-    "E",    # pycodestyle
-    "F",    # pyflakes
-    "I",    # isort
-    "D",    # pydocstyle
-    "D401", # First line should be in imperative mood
-    "T201",
-    "UP",
-]
-lint.ignore = [
-    "UP006",
-    "UP007",
-    "UP035",
-    "D417",
-    "E501",
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
 ]
 
-[tool.ruff.lint.per-file-ignores]
-"tests/*" = ["D", "UP"]
+[tool.hatch.build.targets.wheel]
+packages = ["src/pi_incubator"]
+exclude = [
+    "**/__pycache__",
+    "**/.*",
+    "**/*.pyc",
+    "**/*.pyo",
+    "**/*.pyd",
+]
 
-[tool.ruff.lint.pydocstyle]
-convention = "google"
+[tool.hatch.build.targets.sdist]
+exclude = [
+    "**/__pycache__",
+    "**/.*",
+    "dist",
+    "build",
+    "*.egg-info",
+]
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+check_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --cov=pi_incubator --cov-report=term-missing"

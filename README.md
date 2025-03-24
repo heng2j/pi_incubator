@@ -1,7 +1,8 @@
-# RLOps Policies Incubator
+
+# RLOps Policies (π) Incubator
 
 
-**pi_incubator** is an unified RL training framework designed with RLOps in mind to empower researchers with a modular, scalable framework for training reinforcement learning (RL) policies. It integrates various tools such as TorchRL, Metaflow, and Ray to support both local development and cloud-based experiments (e.g., AWS EKS). This repository includes training scripts, configuration files, and utilities for orchestrating distributed RL experiments at scale, providing frictionless, scalable, and user-friendly infrastructure that accelerates research development cycles
+**Pi(π) Incubator** is an unified RL training framework designed with RLOps in mind to empower researchers with a modular, scalable framework for training reinforcement learning (RL) policies. It integrates various tools such as TorchRL, Metaflow, and Ray to support both local development and cloud-based experiments (e.g., AWS EKS). This repository includes training scripts, configuration files, and utilities for orchestrating distributed RL experiments at scale, providing frictionless, scalable, and user-friendly infrastructure that accelerates research development cycles
 
 
 ![High-Level User Workflow Diagram](docs/images/user_workflow.png)
@@ -92,7 +93,7 @@
 By leveraging TorchRL, Ray, and Metaflow, they jointly provide an end-to-end RLOps solution—from flexible algorithm design to scalable, reproducible production experiments.**
 
 **[TorchRL](https://github.com/pytorch/rl)**  
-- **PyTorch-first:** Leverages PyTorch’s flexibility for custom RL algorithms.  
+- **PyTorch-first:** Leverages PyTorch's flexibility for custom RL algorithms.  
 - **Modularity:** Allows rapid prototyping with composable network components.
 
 **[Ray & Ray Tune](https://github.com/ray-project/ray)**  
@@ -277,3 +278,8 @@ Need to set_exploration_type from ExplorationType.MODE to ExplorationType.DETERM
 
 
 ---
+
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
